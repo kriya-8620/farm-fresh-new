@@ -1,0 +1,171 @@
+<body>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 75px;
+        }
+
+        .links-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .link-item {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-item:hover {
+            background-color: #0056b3;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            padding-left: 2px;
+        }
+
+        .dropdown-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #e9e9e9;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+ /* Cart Icon Styles */
+ .cart-icon-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #007BFF;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+       
+
+    </style>
+
+    <div class="container">
+        <div class="links-container">
+            <a href="/farmers" class="link-item">Home</a>
+            <a href="/farmers/about" class="link-item">About</a>
+
+            <!-- Dropdown for Farmers -->
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Farmers</a>
+                <div class="dropdown-content">
+                    <a href="/farmers/new">Farmer Self Registration</a><br>
+                    <a href="/farmers/details">Farmer Details</a><br>
+                    <a href="/farmers/crops">Sell Your Crops</a><br>
+                    <a href="/farmers/soldcrops">Sold Crops</a><br>
+                    <a href="/farmers/resources">Farmer Resources</a><br>
+                    <a href="/farmers/market">Farmers Market</a><br>
+                </div>
+            </div>
+
+            <% if(!currUser) { %>
+                <a href="/signup" class="link-item">SignUp</a>
+                <a href="/login" class="link-item">Login</a>
+            <% } %>
+
+           <% if(currUser)
+           { %> 
+                <a href="/logout" class="link-item">Logout</a>
+           <% } %>
+
+           <!-- Cart Icon -->
+            <div class="cart-icon-container">
+                <a href="/cart-items">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+                <span class="cart-count"><%= cartItemCount %></span>
+            </a>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        // Event listener for the cart icon
+        document.querySelector('.cart-icon-container a').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.location.href = this.href;
+        });
+    });
+        
+    </script>
+
+
+    
+</body>

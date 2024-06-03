@@ -1,0 +1,96 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <style>
+        /* Add your CSS styling here */
+        .about-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .about-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #333;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .about-content {
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            animation: zoomIn 1s ease-in-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .highlight {
+            color: #007BFF;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="about-container">
+        <div class="about-header">
+            <h1>About Us</h1>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/India_Farming.jpg" alt="Indian Farmer" class="about-image">
+        <div class="about-content">
+            <p>Welcome to our platform! We are dedicated to connecting <span class="highlight">farmers</span> with <span class="highlight">consumers</span>, providing a convenient and efficient way to buy and sell fresh produce.</p>
+            <p>Our mission is to support local farmers and promote sustainable agriculture. We believe in the importance of knowing where your food comes from and supporting small-scale farmers in your community.</p>
+            <p>With our platform, farmers can easily list their products and reach a wider audience, while consumers can discover a variety of fresh and locally sourced produce.</p>
+            <p>Whether you're a farmer looking to sell your crops or a consumer looking for high-quality produce, we're here to help facilitate connections and promote a thriving agricultural community.</p>
+            <p>Thank you for joining us on this journey!</p>
+        </div>
+    </div>
+</body>

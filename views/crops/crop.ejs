@@ -1,0 +1,250 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select,
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #total {
+            background-color: #f4f4f4;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <form action="/farmers/crops" method="POST" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="Crops">Crops:</label>
+            <select name="crop[crops]" id="Crops" class="form-control" required>
+                <option value="" selected disabled>Select Crops</option>
+                <option value="Wheat" data-price="50">Wheat</option>
+                <option value="Legume" data-price="60">Legume</option>
+                <option value="Barley" data-price="55">Barley</option>
+                <option value="Maize" data-price="45">Maize</option>
+                <option value="Paddy" data-price="40">Paddy</option>
+                <option value="Cotton" data-price="70">Cotton</option>
+                <option value="Sugarcane" data-price="30">Sugarcane</option>
+                <option value="Fibers" data-price="65">Fibers</option>
+            </select>
+            <div class="invalid-feedback">Please select a crop.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="district">District:</label>
+            <select name="crop[district]" id="district" class="form-control" required>
+                <option value="" selected disabled>Select District</option>
+                <option value="Hooghly">Hooghly</option>
+                <option value="Howrah">Howrah</option>
+                <option value="North 24 Paraganas">North 24 Paraganas</option>
+                <option value="South 24 Paraganas">South 24 Paraganas</option>
+                <option value="Alipurduar"> Alipurduar</option>
+                <option value="Bankura"> Bankura</option>
+                <option value="Birbhum"> Birbhum</option>
+                <option value="Coochbehar"> Coochbehar</option>
+                <option value="Darjeeling"> Darjeeling</option>
+                <option value="Dakshin Dinajpur"> Dakshin Dinajpur</option>
+                <option value="Uttar Dinajpur"> Uttar Dinajpur</option>
+                <option value="Jalpaiguri"> Jalpaiguri</option>
+                <option value="Jhargram"> Jhargram</option>
+                <option value="Kalimpong"> Kalimpong</option>
+                <option value="Maldah"> Maldah</option>
+                <option value="East Medinipur"> East Medinipur</option>
+                <option value="West Medinipur"> West Medinipur</option>
+                <option value="Murshidabad"> Murshidabad</option>
+                <option value="Nadia"> Nadia</option>
+                <option value="Paschim Bardhaman"> Paschim Bardhaman</option>
+                <option value="Purba Bardhaman"> Purba Bardhaman</option>
+                <option value="Purulia"> Purulia</option>
+            </select>
+            <div class="invalid-feedback">Please select a district.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <select name="crop[location]" id="location" class="form-control" required>
+                <option value="" selected disabled>Select Location</option>
+            </select>
+            <div class="invalid-feedback">Please select a location.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" name="crop[date]" id="date" class="form-control" required>
+            <div class="invalid-feedback">Please select a date.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="crop[quantity]" id="quantity" class="form-control" required>
+            <div class="invalid-feedback">Please enter a quantity.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" name="crop[price]" id="price" class="form-control" readonly>
+            <div class="invalid-feedback">Please select a crop to calculate the price.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="total">Total:</label>
+            <input type="number" name="crop[total]" id="total" class="form-control" readonly>
+            <div class="invalid-feedback">Please enter the quantity and price to calculate the total.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('district').addEventListener('change', function () {
+            const selectedDistrict = this.value;
+            const locations = {
+                'Hooghly': [
+                    "CHINSURAH-MOGRA PS & BDO", "PANDUAH PS & BDO",
+                    "BALAGARH PS & BDO", "POLBA-DADPUR PS & BDO",
+                    "DHANIAKHALI PS & BDO", "SINGUR PANCHAYAT SAMITY & BDO",
+                    "HARIPAL PANCHAYAT SAMITY & BDO", "TARAKESWARPANCHAYAT SAMITY & BDO",
+                    "SERAMPORE-UTTARPARA BDO & PANCHAYET SAMITY", "CHANDITALA-I BDO & PANCHAYET SAMITY",
+                    "CHANDITALA-II BDO & PANCHAYET SAMITY", "JANGIPARA BDO & PANCHAYET SAMITY",
+                    "PURSURAH BDO & PANCHAYET SAMITY", "ARAMBAG BDO & PANCHAYET SAMITY",
+                    "KHANAKUL-I BDO & PANCHAYET SAMITY", "KHANAKUL-II BDO & PANCHAYET SAMITY",
+                    "GOGHAT-I BDO & PANCHAYET SAMITY", "GOGHAT-II BDO & PANCHAYET SAMITY"
+                    // ... other Hooghly locations
+                ],
+                'Howrah': [
+                    "Amta-i", "Amta-ii",
+                    "Bagnan-i", "Bagnan-ii",
+                    "Bally-jagacha", "Domjur",
+                    "Jagatballavpur", "Panchla",
+                    "Sankrail", "Shyampur-i",
+                    "Shyampur-ii", "Udaynarayanpur",
+                    "Uluberia-i", "Uluberia-ii",
+                    // ... other Howrah locations
+                ],
+                'North 24 Paraganas': [
+                    "Amdanga", "Baduria",
+                    "Bagda", "Barasat - I",
+                    "Barasat - Ii", "Barrackpur - I",
+                    "Barrackpur - Ii", "Basirhat - I",
+                    "Basirhat - Ii", "Bongaon",
+                    "Deganga", "Gaighata",
+                    "Habra - I", "Habra - Ii",
+                    "Haroa", "Hasnabad",
+                    "Hingalganj", "Minakhan",
+                    "Rajarhat", "Sandeshkhali - I",
+                    "Sandeshkhali - Ii", "Swarupnagar",
+                    // ... other Howrah locations
+                ],
+                'South 24 Paraganas': [
+                    "Baruipur", "Basanti",
+                    "Bhangar-i", "Bhangar-ii",
+                    "Bishnupur-i", "Bishnupur-ii",
+                    "Budge-budge-i", "Budge-budge-ii",
+                    "Canning-i", "Canning-ii",
+                    "Diamond Harbour-i", "Diamond Harbour-ii",
+                    "Falti", "Gosaba",
+                    "Joynagar-i", "Joynagar-ii",
+                    "Kakdwip", "Kultali",
+                    "Kultali", "Kultali",
+                    "Mathurapur-i", "Mathurapur-ii",
+                    "Magrahat-i", "Magrahat-ii",
+                    "Mandirbazar", "Namkhana",
+                    "Patharpratima", "Sonarpur",
+                    "Thakurpukur-maheshtala"
+                    // ... other South 24 Paraganas locations
+                ]
+                // ... other districts and their locations
+            };
+
+            const locationSelect = document.getElementById('location');
+            locationSelect.innerHTML = '<option value="" selected disabled>Select Location</option>';
+            if (locations[selectedDistrict]) {
+                locations[selectedDistrict].forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location;
+                    option.textContent = location;
+                    locationSelect.appendChild(option);
+                });
+            }
+        });
+
+        document.getElementById('Crops').addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            document.getElementById('price').value = price;
+
+            const quantity = document.getElementById('quantity').value;
+            if (quantity) {
+                document.getElementById('total').value = price * quantity;
+            }
+        });
+
+        document.getElementById('quantity').addEventListener('input', function () {
+            const price = document.getElementById('price').value;
+            const quantity = this.value;
+            if (price) {
+                document.getElementById('total').value = price * quantity;
+            }
+        });
+
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
