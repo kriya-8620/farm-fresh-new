@@ -1,4 +1,10 @@
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Responsive Navbar</title>
     <style>
         /* General Styles */
         body {
@@ -12,53 +18,38 @@
         }
 
         .container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 20px;
+            width: 100%;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            height: 75px;
+            padding: 10px 20px;
         }
 
         .links-container {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        .link-item {
+        .link-item, .dropbtn {
             padding: 10px 20px;
             background-color: #007BFF;
             color: #ffffff;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s ease;
+            margin: 5px;
         }
 
-        .link-item:hover {
+        .link-item:hover, .dropbtn:hover {
             background-color: #0056b3;
         }
 
         /* Dropdown styles */
         .dropdown {
             position: relative;
-        }
-
-        .dropbtn {
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .dropbtn:hover {
-            background-color: #0056b3;
+            margin: 5px;
         }
 
         .dropdown-content {
@@ -70,7 +61,6 @@
             z-index: 1;
             border-radius: 5px;
             overflow: hidden;
-            padding-left: 2px;
         }
 
         .dropdown-item {
@@ -88,11 +78,13 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
- /* Cart Icon Styles */
- .cart-icon-container {
+
+        /* Cart Icon Styles */
+        .cart-icon-container {
             position: relative;
             display: flex;
             align-items: center;
+            margin: 5px;
         }
 
         .cart-icon {
@@ -112,25 +104,74 @@
             padding: 2px 6px;
             font-size: 12px;
         }
-       
 
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .links-container {
+                flex-direction: column;
+                align-items: flex-start;
+                display: none; /* Hide by default */
+            }
+
+            .links-container.show {
+                display: flex; /* Show when toggled */
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                min-width: 100%;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropbtn,
+            .link-item {
+                width: 100%;
+                text-align: left;
+                padding: 10px;
+            }
+
+            .cart-icon-container {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+                font-size: 24px;
+                color: #007BFF;
+                margin: 5px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-icon {
+                display: none;
+            }
+        }
     </style>
-
+</head>
+<body>
     <div class="container">
-        <div class="links-container">
+        <i class="fas fa-bars menu-icon" id="menu-icon"></i>
+        <div class="links-container" id="links-container">
             <a href="/farmers" class="link-item">Home</a>
             <a href="/farmers/about" class="link-item">About</a>
 
             <!-- Dropdown for Farmers -->
             <div class="dropdown">
-                <a href="#" class="dropbtn">Farmers</a>
+                <button class="dropbtn">Farmers</button>
                 <div class="dropdown-content">
-                    <a href="/farmers/new">Farmer Self Registration</a><br>
-                    <a href="/farmers/details">Farmer Details</a><br>
-                    <a href="/farmers/crops">Sell Your Crops</a><br>
-                    <a href="/farmers/soldcrops">Sold Crops</a><br>
-                    <a href="/farmers/resources">Farmer Resources</a><br>
-                    <a href="/farmers/market">Farmers Market</a><br>
+                    <a href="/farmers/new" class="dropdown-item">Farmer Self Registration</a>
+                    <a href="/farmers/details" class="dropdown-item">Farmer Details</a>
+                    <a href="/farmers/crops" class="dropdown-item">Sell Your Crops</a>
+                    <a href="/farmers/soldcrops" class="dropdown-item">Sold Crops</a>
+                    <a href="/farmers/resources" class="dropdown-item">Farmer Resources</a>
+                    <a href="/farmers/market" class="dropdown-item">Farmers Market</a>
                 </div>
             </div>
 
@@ -139,33 +180,36 @@
                 <a href="/login" class="link-item">Login</a>
             <% } %>
 
-           <% if(currUser)
-           { %> 
+            <% if(currUser) { %> 
                 <a href="/logout" class="link-item">Logout</a>
-           <% } %>
+            <% } %>
 
-           <!-- Cart Icon -->
+            <!-- Cart Icon -->
             <div class="cart-icon-container">
                 <a href="/cart-items">
-                <i class="fas fa-shopping-cart cart-icon"></i>
-                <span class="cart-count"><%= cartItemCount %></span>
-            </a>
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count"><%= cartItemCount %></span>
+                </a>
             </div>
-            
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-        // Event listener for the cart icon
-        document.querySelector('.cart-icon-container a').addEventListener('click', function(event) {
-            event.preventDefault();
-            window.location.href = this.href;
+            // Toggle menu for mobile view
+            const menuIcon = document.getElementById('menu-icon');
+            const linksContainer = document.getElementById('links-container');
+
+            menuIcon.addEventListener('click', () => {
+                linksContainer.classList.toggle('show');
+            });
+
+            // Event listener for the cart icon
+            document.querySelector('.cart-icon-container a').addEventListener('click', function(event) {
+                event.preventDefault();
+                window.location.href = this.href;
+            });
         });
-    });
-        
     </script>
-
-
-    
 </body>
+</html>

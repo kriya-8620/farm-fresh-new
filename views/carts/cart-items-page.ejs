@@ -2,7 +2,8 @@
 
 <body>
     <style>
-        body {
+        /* Your existing CSS styles */
+body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -104,12 +105,28 @@
                 opacity: 1;
             }
         }
+        /* Additional styling for quantity buttons */
+        .quantity-button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 
     <div class="cart-container">
         <div class="cart-header">
             <h1>Your Cart</h1>
         </div>
+      
         <div id="cart-items-container">
             <% if (cartItems.length === 0) { %>
                 <p class="empty-cart-message">Your cart is empty.</p>
@@ -119,7 +136,12 @@
                     <div class="cart-item">
                         <div class="cart-item-details">
                             <h3><%= item.name %></h3>
-                            <p>Quantity: <%= item.quantity %></p>
+                            <p>Quantity: 
+                            
+                                <%= item.quantity %>
+                               
+                             
+                            </p>
                             <p>Price: ₹<%= item.price.toFixed(2) %></p>
                         </div>
                         <div class="cart-item-total">
@@ -137,4 +159,13 @@
             <% } %>
         </div>
     </div>
+    <script>
+       
+        
+    
+        
+    
+        
+    </script>
+    
 </body>
