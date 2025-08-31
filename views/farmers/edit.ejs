@@ -1,0 +1,134 @@
+<% layout("/layouts/boilerplate") %> 
+
+<body>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .containered {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border-color: #ddd;
+            box-shadow: none;
+        }
+
+        .add-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <div class="containered">
+        <h3>Edit Farmer Details</h3>
+        <div class="row">
+            <div class="col col-12">
+                <form method="post" action="/farmers/<%= farmer._id %>?_method=PUT" class="needs-validation" novalidate> 
+           
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="name" >Name</label>
+                        <input value="<%= farmer.farmer_name %>" name="farmer[farmer_name]" type="text" class="form-control" id="name" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter your Name.
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="aadhar">Aadhar No</label>
+                        <input class="form-control" id="aadhar"  name="farmer[aadhar_no]" value="<%= farmer.aadhar_no %>" type="number" required pattern="[0-9]{12}" maxlength="12">   
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter a valid 12-digit Aadhar No.
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="mb-3 col-md-6 form-group">
+                            <label class="form-label" for="mobile" >Mobile No</label>
+                            <input value="<%= farmer.mobile_no %>" name="farmer[mobile_no]" type="number" class="form-control" id="mobile" required pattern="[0-9]{10}" maxlength="10">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter a valid 10-digit Mobile No.
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-md-6 form-group">
+                            <label class="form-label" for="gender" >Gender</label>
+                            <input value="<%= farmer.gender %>" name="farmer[gender]" type="text" class="form-control" id="gender" required>
+                            <div class="invalid-feedback">
+                                Please select your Gender.
+                            </div>
+                        </div> 
+                    
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="district" >District</label>
+                        <input value="<%= farmer.district %>" name="farmer[district]" type="text" class="form-control" id="district" required>
+                        <div class="invalid-feedback">
+                            Please enter your District.
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="block" >Block</label>
+                        <input value="<%= farmer.block %>" name="farmer[block]" type="text" class="form-control" id="block" required>
+                        <div class="invalid-feedback">
+                            Please enter your Block.
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="pincode" >Pincode</label>
+                        <input value="<%= farmer.pincode %>" name="farmer[pincode]" type="number" class="form-control" id="pincode" required pattern="[0-9]{6}" maxlength="6">
+                        <div class="invalid-feedback">
+                            Please enter a valid 6-digit Pincode.
+                        </div>
+                    </div>
+
+                    <button class="btn btn-dark add-btn" >Edit</button>
+                    <br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>

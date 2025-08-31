@@ -1,0 +1,139 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .checkout-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .checkout-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .checkout-form label {
+            margin: 10px 0 5px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .checkout-form input, .checkout-form select {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .checkout-button {
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .checkout-button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>Checkout</h1>
+        </div>
+        <form class="checkout-form" action="/checkout" method="POST" onsubmit="return validateForm()">
+            <label for="address">Shipping Address:</label>
+            <input type="text" id="address" name="address" required>
+            <div id="address-error" class="error-message"></div>
+
+            <label for="payment">Payment Method:</label>
+            <select id="payment" name="payment" required>
+                <option value="" disabled selected>Select a payment method</option>
+                <option value="credit_card">Credit Card</option>
+                <option value="debit_card">Debit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="net_banking">Net Banking</option>
+                <option value="upi">UPI</option>
+            </select>
+            <div id="payment-error" class="error-message"></div>
+
+            <button type="submit" class="checkout-button">Place Order</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            const address = document.getElementById('address');
+            const payment = document.getElementById('payment');
+            const addressError = document.getElementById('address-error');
+            const paymentError = document.getElementById('payment-error');
+
+            addressError.textContent = '';
+            paymentError.textContent = '';
+
+            if (address.value.trim() === '') {
+                addressError.textContent = 'Shipping address is required.';
+                isValid = false;
+            }
+
+            if (payment.value === '') {
+                paymentError.textContent = 'Please select a payment method.';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</body>

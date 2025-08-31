@@ -1,0 +1,274 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <style>
+       
+
+        .fruitcontainer {
+            max-width: 100%;
+            width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 200px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+
+    
+
+    <!-- Featured Fruits Section -->
+    <div class="fruitcontainer">
+        <h2>Buy Fresh Fruits</h2>
+        <div class="product-grid">
+            <!-- Fruit Card 1 -->
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/209439/pexels-photo-209439.jpeg?cs=srgb&dl=pexels-pixabay-209439.jpg&fm=jpg" alt="Apple">
+                <h3>Apple</h3>
+                <p>	&#8377; 150.00 per kg</p>
+                <button class="add-to-cart btn btn-primary" data-name="Apple" data-price="150.00"> Add to Cart </button>
+            </div>
+            <!-- Fruit Card 2 -->
+            <div class="product-card">
+                <img src="https://www.shutterstock.com/image-photo/bunch-bananas-isolated-on-white-600nw-1722111529.jpg" alt="Banana">
+                <h3>Banana</h3>
+                <p>&#8377; 25.00 per kg</p>
+                <button class="add-to-cart btn btn-primary" data-name="Banana" data-price="25.00"> Add to Cart </button>
+            </div>
+            <!-- Fruit Card 3 -->
+            <div class="product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Orange-Fruit-Pieces.jpg/2560px-Orange-Fruit-Pieces.jpg" alt="Orange">
+                <h3>Orange</h3>
+                <p>&#8377; 70.00 per kg</p>
+                <button class="add-to-cart btn btn-primary" data-name="Orange" data-price="70.00"> Add to Cart </button>
+            </div>
+            <!-- Fruit Card 4 -->
+            <div class="product-card">
+                <img src="https://thumbs.dreamstime.com/b/three-strawberries-strawberry-leaf-white-background-114284301.jpg" alt="Strawberry">
+                <h3>Strawberry</h3>
+                <p>&#8377; 420.00 per kg</p>
+                <button class="add-to-cart btn btn-primary" data-name="Strawberry" data-price="420.00"> Add to Cart </button>
+            </div>
+           <!-- Fruit Card 5 -->
+           <div class="product-card">
+            <img src="https://cdn.pixabay.com/photo/2021/04/14/17/45/avocado-6179050_640.jpg" alt="Avocado">
+            <h3>Avocado</h3>
+            <p>&#8377; 180.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Avocado" data-price="180.00"> Add to Cart </button>
+        </div>
+        <!-- Fruit Card 6 -->
+        <div class="product-card">
+            <img src="https://t3.ftcdn.net/jpg/01/80/31/64/360_F_180316434_mY7TCf3Yp1MqMCJ0fOITXYLpATSHPQI1.jpg" alt="Pineapple">
+            <h3>Pineapple</h3>
+            <p>&#8377; 90.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Pineapple" data-price="90.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 7 -->
+         <div class="product-card">
+            <img src="https://i.pinimg.com/736x/0a/72/7d/0a727dd7e79f0668a68801d9ee21a404.jpg" alt="Watermelon">
+            <h3>Watermelon</h3>
+            <p>&#8377; 40.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Watermelon" data-price="40.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 8 -->
+         <div class="product-card">
+            <img src="https://media.istockphoto.com/id/529964085/photo/mango.jpg?s=612x612&w=0&k=20&c=rmcMZlLOZFdn4NhUcjnaJ3EBHKYZQ4xH4xzpzFU4JgY=" alt="Mangoe">
+            <h3>Mangoe</h3>
+            <p>&#8377; 80.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Mangoe" data-price="80.00"> Add to Cart </button>
+        </div>
+        
+         <!-- Fruit Card 9 -->
+         <div class="product-card">
+            <img src="https://media.istockphoto.com/id/834807852/photo/whole-kiwi-fruit-and-half-kiwi-fruit-on-white.jpg?s=612x612&w=0&k=20&c=zliUVnZlYPcOxEDYef7PMmOEEODFr8FUkTYqqFVaRG8=" alt="Kiwi">
+            <h3>Kiwi</h3>
+            <p>&#8377; 125.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Kiwi" data-price="125.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 10 -->
+         <div class="product-card">
+            <img src="https://images.pexels.com/photos/87818/background-berries-berry-blackberries-87818.jpeg?cs=srgb&dl=pexels-public-domain-pictures-87818.jpg&fm=jpg" alt="Berry">
+            <h3>Berry</h3>
+            <p>&#8377; 800.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Berry" data-price="800.00"> Add to Cart </button>
+        </div>
+        <!-- Fruit Card 11 -->
+        <div class="product-card">
+            <img src="https://images.pexels.com/photos/2539170/pexels-photo-2539170.jpeg?cs=srgb&dl=pexels-kelly-1179532-2539170.jpg&fm=jpg" alt="BlueBerry">
+            <h3>BlueBerry</h3>
+            <p>&#8377; 1400.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Blueberry" data-price="1400.00"> Add to Cart </button>
+        </div>
+        <!-- Fruit Card 12 -->
+        <div class="product-card">
+            <img src="https://media.istockphoto.com/id/468348156/photo/sweet-cherry.jpg?s=612x612&w=0&k=20&c=kpjFnKkEmigawyaZeFO0X-atV66llbSwcq_ZTiMKrZQ=" alt="Cherry">
+            <h3>Cherry</h3>
+            <p>&#8377; 600.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Cherry" data-price="600.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 13 -->
+         <div class="product-card">
+            <img src="https://st.depositphotos.com/1020804/2370/i/450/depositphotos_23707225-stock-photo-lemons-with-leaves.jpg" alt="Lemon">
+            <h3>Lemon</h3>
+            <p>&#8377; 175.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Lemon" data-price="175.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 14 -->
+         <div class="product-card">
+            <img src="https://cdn.britannica.com/36/160636-050-B1DC5C0A/Laetrile-apricot-pits.jpg" alt="Apricot">
+            <h3>Apricot</h3>
+            <p>&#8377; 190.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Apricot" data-price="190.00"> Add to Cart </button>
+        </div>
+        <!-- Fruit Card 15 -->
+        <div class="product-card">
+            <img src="https://t4.ftcdn.net/jpg/00/61/93/47/360_F_61934758_ABnaExXlhWUvUQ7PdGuyGqbGoVO13Hc3.jpg" alt="Figs">
+            <h3>Figs</h3>
+            <p>&#8377; 180.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Figs" data-price="180.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 16 -->
+         <div class="product-card">
+            <img src="https://media.istockphoto.com/id/687478414/photo/red-cherry-plum-with-green-leaves-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=vje7nFHGnWl-cHDA8wP_UZHryRT5LkAFwn7_8qKtiyc=" alt="Figs">
+            <h3>Plum</h3>
+            <p>&#8377; 280.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Plum" data-price="280.00"> Add to Cart </button>
+        </div>
+        <!-- Fruit Card 17 -->
+        <div class="product-card">
+            <img src="https://media.istockphoto.com/id/1493004470/photo/fresh-ripe-cut-and-whole-papaya-fruits-on-wooden-table-outdoors.webp?b=1&s=170667a&w=0&k=20&c=AChYd_Sc-T2zwlBORG1DRDMFoZn8Uns8qxfgrdTzj9Y=" alt="Papaya">
+            <h3>Papaya</h3>
+            <p>&#8377; 90.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Papaya" data-price="90.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 18 -->
+         <div class="product-card">
+            <img src="https://media.istockphoto.com/id/513123074/photo/ripe-grapefruit-citrus-fruit-with-half-isolated-on-white.jpg?s=612x612&w=0&k=20&c=lv92LgZzjLF2860xuvLfMBU3EGzatynFNwr8lmE30Mw=" alt="Grapefruit">
+            <h3>Grapefruit</h3>
+            <p>&#8377; 370.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Grapefruit" data-price="370.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 19 -->
+         <div class="product-card">
+            <img src="https://media.istockphoto.com/id/1158975559/photo/coco-coconut-half-and-piece-isolated-cocos-white-full-depth-of-field.jpg?s=612x612&w=0&k=20&c=vKw6vttFHIn2CLTPOZizUNkVIzFflCTrUBmZbsHVSck=" alt="Coconut">
+            <h3>Coconut</h3>
+            <p>&#8377; 40.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Coconut" data-price="40.00"> Add to Cart </button>
+        </div>
+         <!-- Fruit Card 20 -->
+         <div class="product-card">
+            <img src="https://cdn.pixabay.com/photo/2017/03/01/15/50/jackfruit-2108869_640.jpg" alt="Jackfruit">
+            <h3>Jackfruit</h3>
+            <p>&#8377; 70.00 per kg</p>
+            <button class="add-to-cart btn btn-primary" data-name="Jackfruit" data-price="70.00"> Add to Cart </button>
+        </div>
+
+            <!-- Add more fruit cards as needed -->
+        </div>
+    </div>
+
+    <script>
+      // Add event listener to all "Add to Cart" buttons
+      const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', async function() {
+                const name = button.dataset.name;
+                const price = parseFloat(button.dataset.price);
+
+                try {
+                    // Send AJAX request to add item to cart
+                    const response = await fetch('/addToCart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name, price })
+                    });
+
+                    if (response.ok) {
+                        // Update cart count displayed on cart icon
+                        const cartCountElement = document.querySelector('.cart-count');
+                        const currentCount = parseInt(cartCountElement.textContent);
+                        cartCountElement.textContent = currentCount + 1;
+                        // Show alert message
+                    alert('Item added to cart!');
+                    } else {
+                    const responseData = await response.json();
+                    // Check if the error is due to user not logged in
+                    if (responseData.error === 'You need to log in to add items to your cart.') {
+                        // Prompt the user to log in
+                        alert('You need to log in to add items to your cart.');
+                        // Redirect the user to the login page
+                        window.location.href = '/login'; // Adjust the URL as per your application
+                    } else {
+                        console.error('Failed to add item to cart:', responseData.error);
+                    }
+                }
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+        });
+
+    </script>
+</body>
+
+   

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Responsive Navbar</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+        }
+
+        .links-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .link-item, .dropbtn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        .link-item:hover, .dropbtn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+            margin: 5px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .dropdown-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #e9e9e9;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Cart Icon Styles */
+        .cart-icon-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #007BFF;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .links-container {
+                flex-direction: column;
+                align-items: flex-start;
+                display: none; /* Hide by default */
+            }
+
+            .links-container.show {
+                display: flex; /* Show when toggled */
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                min-width: 100%;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropbtn,
+            .link-item {
+                width: 100%;
+                text-align: left;
+                padding: 10px;
+            }
+
+            .cart-icon-container {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+                font-size: 24px;
+                color: #007BFF;
+                margin: 5px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-icon {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <i class="fas fa-bars menu-icon" id="menu-icon"></i>
+        <div class="links-container" id="links-container">
+            <a href="/farmers" class="link-item">Home</a>
+            <a href="/farmers/about" class="link-item">About</a>
+
+            <!-- Dropdown for Farmers -->
+            <div class="dropdown">
+                <button class="dropbtn">Farmers</button>
+                <div class="dropdown-content">
+                    <a href="/farmers/new" class="dropdown-item">Farmer Self Registration</a>
+                    <a href="/farmers/details" class="dropdown-item">Farmer Details</a>
+                    <a href="/farmers/crops" class="dropdown-item">Sell Your Crops</a>
+                    <a href="/farmers/soldcrops" class="dropdown-item">Sold Crops</a>
+                    <a href="/farmers/resources" class="dropdown-item">Farmer Resources</a>
+                    <a href="/farmers/market" class="dropdown-item">Farmers Market</a>
+                </div>
+            </div>
+
+            <% if(!currUser) { %>
+                <a href="/signup" class="link-item">SignUp</a>
+                <a href="/login" class="link-item">Login</a>
+                <a href="/forgot-password" class="link-item">Forgot Password</a>
+            <% } %>
+
+            <% if(currUser) { %> 
+                <a href="/logout" class="link-item">Logout</a>
+
+                 <% if(currUser.otpVerified) { %> 
+                <a href="/reset-password" class="link-item">Reset Password</a>
+                
+               <%}%>   
+            <% } %>
+
+            <!-- Cart Icon -->
+            <div class="cart-icon-container">
+                <a href="/cart-items">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count"><%= cartItemCount %></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Toggle menu for mobile view
+            const menuIcon = document.getElementById('menu-icon');
+            const linksContainer = document.getElementById('links-container');
+
+            menuIcon.addEventListener('click', () => {
+                linksContainer.classList.toggle('show');
+            });
+
+            // Event listener for the cart icon
+            document.querySelector('.cart-icon-container a').addEventListener('click', function(event) {
+                event.preventDefault();
+                window.location.href = this.href;
+            });
+        });
+    </script>
+</body>
+</html>
