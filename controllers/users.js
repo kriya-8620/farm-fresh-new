@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const { use } = require("passport");
 const User = require("../models/user");
 const ExpressError=require("../utils/ExpressError.js");
@@ -5,6 +6,10 @@ const sendOTP = require("../utils/sendOTP");
 const crypto = require("crypto");
 
 
+=======
+const User = require("../models/user");
+const ExpressError=require("../utils/ExpressError.js");
+>>>>>>> 4c7d39e3bbc23ed1d322c25e129c105b7c2abefd
 
 module.exports.showSignup=(req, res) => {
     res.render("users/signup");
@@ -31,6 +36,7 @@ module.exports.submitSignup=async (req, res, next) => {
     }
 };
 
+<<<<<<< HEAD
 // controllers/usersController.js
 module.exports.login = (req, res) => {
   try {
@@ -66,6 +72,33 @@ module.exports.submitLogin = async (req, res) => {
 };
 
 
+=======
+module.exports.login=(req, res) => {
+    res.render("users/login.ejs");
+};
+
+module.exports.submitLogin=async (req, res) => {
+    try {
+        // Retrieve the user's cart items from the database
+        if (req.isAuthenticated()) {
+            const cart = await User.findOne({ _id: req.user._id });
+            
+            if (cart) {
+               req.session.cart = cart.cartItems;
+                
+            }
+        }
+        req.flash("success", "Welcome to Farmfresh");
+        let redirectUrl = res.locals.redirectUrl || "/farmers";
+        res.redirect(redirectUrl);
+    } catch (error) {
+        console.error('Error retrieving cart items:', error);
+        req.flash("error", "An error occurred. Please try again.");
+        res.redirect("/login");
+    }
+};
+
+>>>>>>> 4c7d39e3bbc23ed1d322c25e129c105b7c2abefd
 module.exports.logout=async(req, res) => {
     try {
         // Save the cart items in the database if the user is logged in
@@ -75,9 +108,12 @@ module.exports.logout=async(req, res) => {
                 { items: req.user.cart },
                 { new: true,upsert: true }
             );
+<<<<<<< HEAD
 
                await User.findByIdAndUpdate(req.user._id, {
                   otpVerified: false});
+=======
+>>>>>>> 4c7d39e3bbc23ed1d322c25e129c105b7c2abefd
         }
         
         req.logout((err) => {
@@ -85,8 +121,11 @@ module.exports.logout=async(req, res) => {
                 console.error('Error logging out:', err);
                  throw new ExpressError(500,err);
             }
+<<<<<<< HEAD
          
 
+=======
+>>>>>>> 4c7d39e3bbc23ed1d322c25e129c105b7c2abefd
             req.flash("success", "You are logged out");
             res.redirect("/farmers");
         });
@@ -94,6 +133,7 @@ module.exports.logout=async(req, res) => {
         console.error('Error logging out:', error.message);
         throw new ExpressError(500,error);
     }
+<<<<<<< HEAD
 };
 
 // OTP Login
@@ -207,4 +247,6 @@ module.exports.setPassword = async (req, res, next) => {
     req.flash('error', 'Failed to update password');
     res.redirect('/set-new-password');
   }
+=======
+>>>>>>> 4c7d39e3bbc23ed1d322c25e129c105b7c2abefd
 };
