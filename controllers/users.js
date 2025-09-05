@@ -1,5 +1,3 @@
-
-const { use } = require("passport");
 const User = require("../models/user");
 const ExpressError=require("../utils/ExpressError.js");
 const sendOTP = require("../utils/sendOTP");
@@ -31,18 +29,6 @@ module.exports.submitSignup=async (req, res, next) => {
     }
 };
 
-// controllers/usersController.js
-module.exports.login = (req, res) => {
-  try {
-    sendOTP();
-    res.render("users/login.ejs");
-
-  } catch (err) {
-    console.error("Render error:", err);
-    res.send("Something went wrong while rendering the login page.");
-  }
-};
-
 
 
 module.exports.submitLogin = async (req, res) => {
@@ -71,26 +57,6 @@ module.exports.login=(req, res) => {
     res.render("users/login.ejs");
 };
 
-module.exports.submitLogin=async (req, res) => {
-    try {
-        // Retrieve the user's cart items from the database
-        if (req.isAuthenticated()) {
-            const cart = await User.findOne({ _id: req.user._id });
-            
-            if (cart) {
-               req.session.cart = cart.cartItems;
-                
-            }
-        }
-        req.flash("success", "Welcome to Farmfresh");
-        let redirectUrl = res.locals.redirectUrl || "/farmers";
-        res.redirect(redirectUrl);
-    } catch (error) {
-        console.error('Error retrieving cart items:', error);
-        req.flash("error", "An error occurred. Please try again.");
-        res.redirect("/login");
-    }
-};
 
 
 module.exports.logout=async(req, res) => {
